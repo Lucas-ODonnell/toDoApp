@@ -1,0 +1,80 @@
+import { format } from '../node_modules/date-fns';
+import ToDo from './toDo.js';
+export const Show = (() => {
+	const eventButton = document.querySelector('[data-add-modal]');
+	const eventExitButton = document.querySelector('[data-hide-button]');
+	const overlay = document.getElementById('overlay');
+
+	eventButton.addEventListener('click', () => {
+		const eventModal = document.querySelector(eventButton.dataset.addModal);
+		openForm(eventModal);
+	});
+
+	eventExitButton.addEventListener('click', () => {
+		const eventModal = eventExitButton.closest('.wrap-modal');
+		hideForm(eventModal);
+	});
+
+	function openForm(eventModal) {
+		if (eventModal == null) return;
+		eventModal.classList.add('active');
+		overlay.classList.add('active');
+	}
+
+	function hideForm(eventModal) {
+		if (eventModal == null) return;
+		eventModal.classList.remove('active');
+		overlay.classList.remove('active');
+	}
+})();
+
+export const Submit = (() => {
+	const modal = document.querySelector('[data-wrap-form]');
+	const overlay = document.getElementById('overlay');
+
+	let myEvents = [];
+	const storedLibrary = localStorage.getItem('myEvents');
+	if (storedLibrary) {
+		myEvents = JSON.parse(storedLibrary).map((event) => new ToDo(event));
+	}
+
+	const eventForm = document.querySelector('[data-new-event-form]');
+	eventForm.addEventListener('submit', newEvent);
+	function newEvent(e) {
+		e.preventDefault();
+		let newEvent = new ToDo({
+			title: document.querySelector('[name=title]').value,
+			description: document.querySelector('[name=title]').value,
+			dueDate: document.querySelector('[name=due-date]').value,
+			priority: document.querySelector('[name=priority]').value
+		})
+		addToDoToArray(newEvent);
+		hideModal(modal);
+		hideOverlay(overlay);
+		this.reset();
+	}
+
+	function addToDoToArray(newEvent) {
+		formatDate(newEvent);
+		myEvents.push(newEvent);
+		localStorage.setItem('myEvents', JSON.stringify(myEvents));
+	}
+
+	function formatDate(newEvent) {
+		let formatted = format(new Date(newEvent.dueDate).toISOString()), 'MMM-do-yyy');
+		newEvent.dueDate = formatted;
+	}
+
+	function hideModal(modal) {
+		if (modal == null) return;
+		modal.classList.remove('active');
+	}
+
+	function hideOverlay(overlay) {
+		if (overlay == null) return;
+		overlay.classList.remove('active');
+	}
+})();
+
+
+

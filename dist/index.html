@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>To Do</title>
+		<link rel="stylesheet" href="../stylesheets/main.css">
+		<script defer src="main.js"></script>
+	</head>
+	<body>
+		<header>
+			<h1 class="title">To Do Lists</h1>
+		</header>
+		<section>
+			<table>
+				<tbody data-todo-events>
+				</tbody>
+			</table>
+
+			<div data-expand-modal class="wrap-event-modal"></div>
+		</section>
+		<div class="wrap-btn">
+			<button data-add-modal="#todo-modal">Add event</button>
+		</div>
+		<div data-wrap-form id="todo-modal" class="wrap-modal">
+			<form data-new-event-form class="todo-form">
+				<div class="modal-todoheader">
+					<h2><strong>Add an Event</strong></h2>
+					<button data-hide-button type="button" class="close-button">&times;</button>
+				</div>
+
+				<div>
+					<label for="title">Title: </label><br />
+					<input type="text" name="title" id="title" required>
+				</div>
+
+				<div>
+					<label for="description">Description: </label><br />
+					<textarea type="text" name="description" id="description" required></textarea>
+				</div>
+				<div class="date-priority">
+				<div>
+					<label for="due-date">Due Date: </label>
+					<input type="date" name="due-date" id="due-date" required>
+				</div>
+				<div>
+					<label for="priority">Priority: </label>
+					<select id="priority" name="priority">
+						<option value="high">High</option>
+						<option value="medium">Medium</option>
+						<option value="low">Low</option>
+					</select>
+				</div>
+				</div>
+				<div class="add-event-submit">
+					<button data-submit-form type="submit">Add</button>
+				</div>
+			</form>
+		</div>
+		<div id="overlay"></div>
+	</body>
+</html>
