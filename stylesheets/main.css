@@ -59,19 +59,28 @@ strong {
 table {
 	overflow: scroll;
 	border-collapse: collapse;
-	width: 80%;
+	width: 45%;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 16px;
 }
 
+tr {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: rgba(55,13,13,.5);
+	padding-left: 10px;
+	padding-right: 10px;
+	border-radius: 15px;
+}
+
 
 td {
 	padding: 5px;
-	width: 80px;
+	width: auto;
 	font-size: 16px;
 	font-style: italic;
-	background-color: rgba(55,13,13,.5);
 }
 
 button {
@@ -169,7 +178,11 @@ input {
 .wrap-btn {
 	display: flex;
 	justify-content: center;
-	margin-top: 16px;
+}
+
+.h3-btn {
+	margin-bottom: 8px;
+	text-decoration: underline;
 }
 
 .wrap-event-modal {
@@ -206,3 +219,12 @@ input {
 	display: flex;
 	justify-content: flex-end;
 }
+
+.wrap-text {
+	margin-bottom: 8px;
+}
+
+.wrap-complete {
+	margin-top: 8px;
+}
+

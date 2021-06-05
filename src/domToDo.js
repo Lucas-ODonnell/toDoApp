@@ -7,6 +7,27 @@ if (storedLibrary) {
 	myEvents = JSON.parse(storedLibrary).map((event) => new ToDo(event));
 }
 
+export const updateDisplay = (() => {
+	const tableBody = document.querySelector('[data-todo-events]');
+
+	function updateToDoDisplay(myEvents) {
+		tableBody.innerHTML = myEvents.map((toDoEvent) => `
+		<tr>
+				<td><strong>To Do:</strong> ${toDoEvent.title} </td>
+				<td><strong>Due:</strong> ${toDoEvent.dueDate}</td>
+				<td><strong>Priority:</strong> ${toDoEvent.priority}</td>
+				<td><button data-expand-event>Expand</button></td>
+				</tr><br />`).join('');
+	}
+
+	return {
+		updateToDoDisplay,
+	}
+
+})();
+
+updateDisplay.updateToDoDisplay(myEvents);
+
 export const showForm = (() => {
 	const eventButton = document.querySelector('[data-add-modal]');
 	const eventExitButton = document.querySelector('[data-hide-button]');
@@ -53,7 +74,7 @@ export const submitForm = (() => {
 		hideModal(modal);
 		hideOverlay(overlay);
 		this.reset();
-		updateDisplay.updateToDoDisplay(myEvents);
+		location.reload();
 	}
 
 	function addToDoToArray(newEvent) {
@@ -73,27 +94,6 @@ export const submitForm = (() => {
 		overlay.classList.remove('active');
 	}
 })();
-
-export const updateDisplay = (() => {
-	const tableBody = document.querySelector('[data-todo-events]');
-
-	function updateToDoDisplay(myEvents) {
-		tableBody.innerHTML = myEvents.map((toDoEvent) => `
-		<tr>
-				<td><strong>Title:</strong> ${toDoEvent.title} </td>
-				<td><strong>Due:</strong> ${toDoEvent.dueDate}</td>
-				<td><strong>Priority:</strong> ${toDoEvent.priority}</td>
-				<td><button data-expand-event>Expand</button></td>
-				</tr>`).join('');
-	}
-
-	return {
-		updateToDoDisplay,
-	}
-
-})();
-
-updateDisplay.updateToDoDisplay(myEvents);
 
 export const showCard = (() => {
 	const expandedCard = document.querySelector('[data-expand-modal]');
@@ -117,15 +117,15 @@ export const showCard = (() => {
 						<div class="wrap-event-close">
 						<button type="button" class="close-button" data-card-close>&times;</button>
 						</div>
-						<h3 class="wrap-btn"><strong>${clickedEvent.title}</strong></h3>
+						<h3 class="wrap-btn h3-btn"><strong>${clickedEvent.title}</strong></h3>
 						<p class="wrap-text">
 						${clickedEvent.description}
 						</p>
 						<div class="date-priority">
-							<div>Due: ${clickedEvent.dueDate}</div>
-							<div>Priority: ${clickedEvent.priority}</div>
+							<div><strong>Due:</strong> ${clickedEvent.dueDate}</div>
+							<div><strong>Priority:</strong> ${clickedEvent.priority}</div>
 						</div>
-						<div class="wrap-btn">
+						<div class="wrap-btn wrap-complete">
 							<button>Complete: ${clickedEvent.complete ? "Yes" : "No"}</button>
 						</div>
 
@@ -144,4 +144,5 @@ export const showCard = (() => {
 		})
 	}
 })();
+
 
