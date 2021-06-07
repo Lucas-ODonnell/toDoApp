@@ -228,3 +228,9 @@ input {
 	margin-top: 8px;
 }
 
+
+.bottom-row {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
