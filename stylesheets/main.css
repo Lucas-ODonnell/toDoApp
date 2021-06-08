@@ -69,10 +69,21 @@ tr {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	background-color: rgba(55,13,13,.5);
 	padding-left: 10px;
 	padding-right: 10px;
 	border-radius: 15px;
+}
+
+tr.danger {
+	background-color: red;
+}
+
+tr.medium {
+	background-color: yellow;
+}
+
+tr.easy {
+	background-color: green;
 }
 
 
@@ -196,6 +207,11 @@ input {
 	border-radius: 10px;
 	width: 500px;
 	max-width: 80%;
+	transform: scale(0);
+}
+
+.wrap-event-modal.active {
+	transform: scale(1);
 }
 
 
@@ -222,6 +238,8 @@ input {
 
 .wrap-text {
 	margin-bottom: 8px;
+	word-wrap: break-word;
+	line-height: 1.5;
 }
 
 .wrap-complete {
