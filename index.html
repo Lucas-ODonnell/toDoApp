@@ -11,13 +11,33 @@
 			<h1 class="title">To Do Lists</h1>
 		</header><br />
 		<section>
+			<!-- this section is to display events -->
 			<table>
 				<tbody data-todo-events>
 				</tbody>
 			</table>
-
-			<div data-expand-modal class="wrap-event-modal"></div>
+			<!-- This is section is to display card expanding event -->
+			<div data-expand-modal class="wrap-event-modal">
+				<div class="card">
+					<div class="container">
+						<div class="wrap-event-close">
+							<button type="button" class="close-button" data-card-close>&times;</button>
+						</div>
+						<h3 data-event-title class="wrap-btn h3-btn"></h3>
+						<p data-card-description class="wrap-text"></p>
+						<div class="date-priority">
+							<div data-card-due-date ></div>
+							<div data-card-priority></div>
+						</div>
+						<div class="bottom-row">
+							<button data-modal-update class="wrap-complete">Update</button>
+							<div data-complete-status class="wrap-btn wrap-complete"></div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</section>
+		<!-- this section is for adding a new event -->
 		<div class="wrap-btn">
 			<button data-add-modal="#todo-modal">Add event</button>
 		</div>
@@ -56,6 +76,7 @@
 				</div>
 			</form>
 		</div>
+		<!-- used to darken background when using modal -->
 		<div id="overlay"></div>
 	</body>
 </html>
