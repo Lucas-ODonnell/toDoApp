@@ -145,3 +145,19 @@ export const editToDo = (() => {
 	}
 })();
 
+export const deleteToDo = (() => {
+	const deleteButtons = document.querySelectorAll('[data-delete-card]');
+
+	deleteButtons.forEach((button, index) => {
+		button.addEventListener('click', () => {
+			deleteEvent(index);
+			localStorage.setItem('myEvents', JSON.stringify(myEvents));
+			location.reload();
+		});
+	});
+
+	function deleteEvent(index) {
+		myEvents.splice(index, 1);
+	}
+
+})();

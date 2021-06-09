@@ -16,6 +16,7 @@ export const updateDisplay = (() => {
 				<td><strong>Due:</strong> ${toDoEvent.dueDate}</td>
 				<td><button data-expand-event>Expand</button></td>
 				<td><button id=${index} data-edit-card='#todo-update'>Edit</button></td>
+				<td><button data-delete-card>Delete</button></td>
 				</tr><br />`).join('');
 		//color code the events based on priority
 		myEvents.map((toDoEvent, index) => {
