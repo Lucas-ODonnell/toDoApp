@@ -4,7 +4,6 @@ export default class ToDo {
 		this.description = params.description;
 		this.dueDate = params.dueDate;
 		this.priority = params.priority;
-		this.complete = false;
 	}
 
 	toggleComplete() {
@@ -28,6 +27,6 @@ export default class ToDo {
 	}
 
 	updatePriority(priority) {
-		this.priority = priorityArray[priority];
+		this.priority = priority;
 	}
 }

@@ -1,3 +1,7 @@
 import ToDo from './toDo.js';
 import Project from './project.js';
-import {popUpForm, submitForm, updateDisplay, showCard} from './DOM.js';
+import {popUpForm, updateDisplay, showCard} from './toDoDom.js';
+import {submitForm, editToDo} from './toDoActions.js';
+
+
+

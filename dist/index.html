@@ -29,12 +29,47 @@
 							<div data-card-due-date ></div>
 							<div data-card-priority></div>
 						</div>
-						<div class="bottom-row">
-							<button data-modal-update class="wrap-complete">Update</button>
+						<div data-bottom-row class="bottom-row">
 							<div data-complete-status class="wrap-btn wrap-complete"></div>
 						</div>
 					</div>
 				</div>
+			</div>
+			<!-- Section to update -->
+			<div data-wrap-form-update id="todo-update" class="wrap-modal">
+				<form data-update-event-form class="todo-form">
+					<div class="modal-todoheader">
+						<h2><strong>Update an Event</strong></h2>
+						<button data-hide-update-button type="button" class="close-button">&times;</button>
+					</div>
+
+					<div>
+						<label for="update-title">Title: </label><br />
+						<input type="text" name="update-title" id="update-title" >
+					</div>
+
+					<div>
+						<label for="update-description">Description: </label><br />
+						<textarea type="text" name="update-description" id="update-description" ></textarea>
+					</div>
+					<div class="date-priority">
+						<div>
+							<label for="update-due-date">Due Date: </label>
+							<input type="date" name="update-due-date" id="update-due-date" >
+						</div>
+						<div>
+							<label for="update-priority">Priority: </label>
+							<select id="update-priority" name="update-priority">
+								<option value="high">High</option>
+								<option value="medium">Medium</option>
+								<option value="low">Low</option>
+							</select>
+						</div>
+					</div>
+					<div class="add-event-submit">
+						<button data-submit-update type="submit">Update</button>
+					</div>
+				</form>
 			</div>
 		</section>
 		<!-- this section is for adding a new event -->

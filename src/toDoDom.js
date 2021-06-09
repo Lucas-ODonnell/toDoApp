@@ -1,4 +1,3 @@
-import {dateFormatter} from './dateFormatter.js';
 import ToDo from './toDo.js';
 
 let myEvents = [];
@@ -16,6 +15,7 @@ export const updateDisplay = (() => {
 				<td><strong>To Do:</strong> ${toDoEvent.title} </td>
 				<td><strong>Due:</strong> ${toDoEvent.dueDate}</td>
 				<td><button data-expand-event>Expand</button></td>
+				<td><button id=${index} data-edit-card='#todo-update'>Edit</button></td>
 				</tr><br />`).join('');
 		//color code the events based on priority
 		myEvents.map((toDoEvent, index) => {
@@ -69,45 +69,6 @@ export const popUpForm = (() => {
 	}
 })();
 
-export const submitForm = (() => {
-	const modal = document.querySelector('[data-wrap-form]');
-	const overlay = document.getElementById('overlay');
-
-	const eventForm = document.querySelector('[data-new-event-form]');
-	eventForm.addEventListener('submit', newEvent);
-	function newEvent(e) {
-		e.preventDefault();
-		let newEvent = new ToDo({
-			title: document.querySelector('[name=title]').value,
-			description: document.querySelector('[name=description]').value,
-			dueDate: document.querySelector('[name=due-date]').value,
-			priority: document.querySelector('[name=priority]').value
-		})
-		addToDoToArray(newEvent);
-		hideModal(modal);
-		hideOverlay(overlay);
-		this.reset();
-		location.reload();
-	}
-
-	function addToDoToArray(newEvent) {
-		let formatted = dateFormatter.formatDate(newEvent.dueDate);
-		newEvent.dueDate = formatted;
-		myEvents.push(newEvent);
-		localStorage.setItem('myEvents', JSON.stringify(myEvents));
-	}
-
-	function hideModal(modal) {
-		if (modal == null) return;
-		modal.classList.remove('active');
-	}
-
-	function hideOverlay(overlay) {
-		if (overlay == null) return;
-		overlay.classList.remove('active');
-	}
-})();
-
 export const showCard = (() => {
 	const expandedCard = document.querySelector('[data-expand-modal]');
 	const expandButtons = document.querySelectorAll('[data-expand-event]');
@@ -118,11 +79,13 @@ export const showCard = (() => {
 	const cardPriority = document.querySelector('[data-card-priority]');
 	const cardCompleteStatus = document.querySelector('[data-complete-status]');
 	const closeCardButton = document.querySelector('[data-card-close]');
+	const updateButton = document.createElement('button');
+	const bottomRow = document.querySelector('[data-bottom-row]');
 
 	expandButtons.forEach((button, index) => {
 		button.addEventListener('click', () => {
 			const clickedEvent = myEvents[index];
-			expandCard(clickedEvent);
+			expandCard(clickedEvent, index);
 			overlay.classList.add('active');
 		});
 	});
@@ -133,7 +96,7 @@ export const showCard = (() => {
 	});
 
 
-	function expandCard(clickedEvent) {
+	function expandCard(clickedEvent, index) {
 		cardTitle.innerHTML = `<strong>${clickedEvent.title}</strong>`;
 		cardDescription.innerHTML = `${clickedEvent.description}`;
 		cardDueDate.innerHTML = `<strong>Due:</strong> ${clickedEvent.dueDate}`;
