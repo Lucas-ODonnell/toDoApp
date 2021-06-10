@@ -1,4 +1,4 @@
-import { editToDo } from './toDoActions.js';
+import { editToDo, deleteEvents} from './toDoActions.js';
 import { myEvents } from './myEvents.js';
 
 export const updateDisplay = (() => {
@@ -24,17 +24,10 @@ export const updateDisplay = (() => {
 		});
 	};
 
-	tableBody.addEventListener('click', deleteRow);
+	tableBody.addEventListener('click', deleteEvents.deleteRow); // ./toDoActions.js
 	tableBody.addEventListener('click', showCard);
 	tableBody.addEventListener('click', showCardToUpdate);
-	//**************Delete a row ******************************************
-	function deleteRow(e) {
-		if (!e.target.matches('[data-delete-card]')) return;
-		myEvents.splice(e.target.dataset.deleteCard, 1);
-
-		localStorage.setItem('myEvents', JSON.stringify(myEvents));
-		updateToDoDisplay();
-	}
+	
 	//*****************Show Card *******************************************
 	function showCard(e) {
 		if (!e.target.matches('[data-expand-event]')) return;
@@ -120,6 +113,4 @@ export const popUpForm = (() => {
 		overlay.classList.remove('active');
 	}
 })();
-
-
 updateDisplay.updateToDoDisplay();
