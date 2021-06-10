@@ -1,11 +1,9 @@
 import {dateFormatter} from './dateFormatter.js';
 import ToDo from './toDo.js';
+import {updateDisplay} from './toDoDom.js';
+import { myEvents }from './myEvents.js';
 
-let myEvents = [];
-const storedLibrary = localStorage.getItem('myEvents');
-if (storedLibrary) {
-	myEvents = JSON.parse(storedLibrary).map((event) => new ToDo(event));
-}
+
 
 export const submitForm = (() => {
 	const modal = document.querySelector('[data-wrap-form]');
@@ -25,69 +23,39 @@ export const submitForm = (() => {
 		hideModal(modal);
 		hideOverlay(overlay);
 		this.reset();
-		location.reload();
+		updateDisplay.updateToDoDisplay();
 	}
 
-	function addToDoToArray(newEvent) {
+	const addToDoToArray = (newEvent) => {
 		let formatted = dateFormatter.formatDate(newEvent.dueDate);
 		newEvent.dueDate = formatted;
 		myEvents.push(newEvent);
 		localStorage.setItem('myEvents', JSON.stringify(myEvents));
 	}
 
-	function hideModal(modal) {
+	const hideModal = (modal) => {
 		if (modal == null) return;
 		modal.classList.remove('active');
 	}
 
-	function hideOverlay(overlay) {
+	const hideOverlay = (overlay) => {
 		if (overlay == null) return;
 		overlay.classList.remove('active');
 	}
 })();
 
 export const editToDo = (() => {
-	const modal = document.querySelector('[data-wrap-form-update]');
-
-	//data-edit-card from updateDisplay.updateToDoDisplay
-	const editButtons = document.querySelectorAll('[data-edit-card]');
-	const overlay = document.getElementById('overlay');
-	const closeButton = document.querySelector('[data-hide-update-button]');
-
 	const editForm = document.querySelector('[data-update-event-form]');
+	const overlay = document.getElementById('overlay');
+	const updateCardModal = document.querySelector('[data-wrap-form-update]');
 	let newTitle = "";
 	let newDescription = "";
 	let newDueDate = "";
 	let newPriority = "";
 	let thisIndex;
 
-	editButtons.forEach(button => {
-		button.addEventListener('click', () => {
-			const updateModal = document.querySelector(button.dataset.editCard);
-			showUpdateModal(updateModal, button);
-		});
-	});
-
-	closeButton.addEventListener('click', () => {
-		const updateModal = closeButton.closest('.wrap-modal');
-		closeUpdateModal(updateModal);
-	})
-
-	function showUpdateModal(updateModal, button) {
-		if (updateModal == null ) return;
-		updateModal.classList.add('active');
-		overlay.classList.add('active');
-		thisIndex = button.id;
-		updateModalEvent();
-	}
-
-	function closeUpdateModal(updateModal) {
-		if (updateModal == null) return;
-		updateModal.classList.remove('active');
-		overlay.classList.remove('active');
-	}
-
-	function updateModalEvent() {
+	const updateModalEvent = (index) => {
+		thisIndex = index
 		editForm.addEventListener('submit', updateThisEvent);
 	}
 
@@ -98,17 +66,19 @@ export const editToDo = (() => {
 		makeChangesToEvent();
 		localStorage.setItem('myEvents', JSON.stringify(myEvents));
 		this.reset();
-		location.reload();
+		overlay.classList.remove('active');
+		updateCardModal.classList.remove('active');
+		updateDisplay.updateToDoDisplay();
 	}
 
-	function setUpdatedParams() {
+	const setUpdatedParams = () => {
 		newTitle = document.querySelector('[name=update-title]').value;
 		newDescription = document.querySelector('[name=update-description]').value;
 		newDueDate = document.querySelector('[name=update-due-date]').value;
 		newPriority = document.querySelector('[name=update-priority]').value;
 	}
 
-	function makeChangesToEvent() {
+	const makeChangesToEvent = () => {
 		let thisObject = myEvents[thisIndex];
 		changeTitle(thisObject);
 		changeDescription(thisObject);
@@ -116,21 +86,21 @@ export const editToDo = (() => {
 		changePriority(thisObject);
 	}
 
-	function changeTitle(thisObject) {
+	const changeTitle = (thisObject) => {
 		if (newTitle == "") {
 			newTitle = thisObject.title;
 		};
 		thisObject.updateTitle(newTitle);
 	}
 
-	function changeDescription(thisObject) {
+	const changeDescription = (thisObject) => {
 		if (newDescription == "") {
 			newDescription = thisObject.description;
 		};
 		thisObject.updateDescription(newDescription);
 	}
 
-	function changeDueDate(thisObject) {
+	const changeDueDate = (thisObject) => {
 		if (newDueDate == "") {
 			newDueDate = thisObject.dueDate;
 			thisObject.updateDueDate(newDueDate);
@@ -139,25 +109,13 @@ export const editToDo = (() => {
 		thisObject.updateDueDate(dateFormatter.formatDate(newDueDate));
 	}
 
-	function changePriority(thisObject) {
+	const changePriority = (thisObject) => {
 		if (newPriority == null) return;
 		thisObject.updatePriority(newPriority);
 	}
-})();
 
-export const deleteToDo = (() => {
-	const deleteButtons = document.querySelectorAll('[data-delete-card]');
-
-	deleteButtons.forEach((button, index) => {
-		button.addEventListener('click', () => {
-			deleteEvent(index);
-			localStorage.setItem('myEvents', JSON.stringify(myEvents));
-			location.reload();
-		});
-	});
-
-	function deleteEvent(index) {
-		myEvents.splice(index, 1);
+	return {
+		updateModalEvent,
 	}
-
 })();
+

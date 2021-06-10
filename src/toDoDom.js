@@ -1,30 +1,82 @@
-import ToDo from './toDo.js';
-
-let myEvents = [];
-const storedLibrary = localStorage.getItem('myEvents');
-if (storedLibrary) {
-	myEvents = JSON.parse(storedLibrary).map((event) => new ToDo(event));
-}
+import { editToDo } from './toDoActions.js';
+import { myEvents } from './myEvents.js';
 
 export const updateDisplay = (() => {
 	const tableBody = document.querySelector('[data-todo-events]');
+	const showThisCard = document.querySelector('[data-expand-modal]');
+	const updateCardModal = document.querySelector('[data-wrap-form-update]');
+	const closeButton = document.querySelector('[data-card-close]');
+	const updateCloseButton = document.querySelector(`[data-hide-update-button]`);
+	const overlay = document.getElementById('overlay');
 
-	function updateToDoDisplay(myEvents) {
+	function updateToDoDisplay(){
 		tableBody.innerHTML = myEvents.map((toDoEvent,index) => `
 		<tr data-card-row-${index}>
 				<td><strong>To Do:</strong> ${toDoEvent.title} </td>
 				<td><strong>Due:</strong> ${toDoEvent.dueDate}</td>
-				<td><button data-expand-event>Expand</button></td>
-				<td><button id=${index} data-edit-card='#todo-update'>Edit</button></td>
-				<td><button data-delete-card>Delete</button></td>
+				<td><button class="is-expanded-card"data-expand-event="${index}">Expand</button></td>
+				<td><button data-edit-card="${index}">Edit</button></td>
+				<td><button class="is-danger" data-delete-card="${index}">Delete</button></td>
 				</tr><br />`).join('');
 		//color code the events based on priority
 		myEvents.map((toDoEvent, index) => {
 			colorCode(toDoEvent, index);
 		});
+	};
+
+	tableBody.addEventListener('click', deleteRow);
+	tableBody.addEventListener('click', showCard);
+	tableBody.addEventListener('click', showCardToUpdate);
+	//**************Delete a row ******************************************
+	function deleteRow(e) {
+		if (!e.target.matches('[data-delete-card]')) return;
+		myEvents.splice(e.target.dataset.deleteCard, 1);
+
+		localStorage.setItem('myEvents', JSON.stringify(myEvents));
+		updateToDoDisplay();
+	}
+	//*****************Show Card *******************************************
+	function showCard(e) {
+		if (!e.target.matches('[data-expand-event]')) return;
+		showThisCard.classList.add('active');
+		overlay.classList.add('active');
+		const index = e.target.dataset.expandEvent;
+		fillCard(index);
 	}
 
-	function colorCode(toDoEvent, index) {
+	function fillCard(index) {
+		const thisTitle = document.querySelector('[data-event-title]');
+		const thisDescription = document.querySelector('[data-card-description]');
+		const thisDueDate = document.querySelector('[data-card-due-date]');
+		const thisPriority = document.querySelector('[data-card-priority]');
+		thisTitle.innerHTML = `<strong>${myEvents[index].title}</strong>`;
+		thisDescription.innerText = `${myEvents[index].description}`
+		thisDueDate.innerHTML = `<strong>Due:</strong> ${myEvents[index].dueDate}`
+		thisPriority.innerHTML = `<strong>Priority:</strong> ${myEvents[index].priority}`;
+	}
+
+	closeButton.addEventListener('click', () => {
+		const openCard = closeButton.closest('.wrap-event-modal');
+		openCard.classList.remove('active');
+		overlay.classList.remove('active');
+	})
+	//********************Update section *************************************
+	function showCardToUpdate(e) {
+		if (!e.target.matches('[data-edit-card]')) return;
+		updateCardModal.classList.add('active');
+		overlay.classList.add('active');
+		const index = e.target.dataset.editCard;
+		editToDo.updateModalEvent(index);
+	}
+
+	updateCloseButton.addEventListener('click', () => {
+		const updateModal = updateCloseButton.closest('.wrap-modal');
+		updateCardModal.classList.remove('active');
+		overlay.classList.remove('active');
+	})
+
+
+	const colorCode = (toDoEvent, index) => {
 		const thisTR = document.querySelector(`[data-card-row-${index}]`);
 		if (toDoEvent.priority == "high") {
 			thisTR.classList.add('danger');
@@ -40,7 +92,6 @@ export const updateDisplay = (() => {
 	}
 })();
 
-updateDisplay.updateToDoDisplay(myEvents);
 /*This is the form for creating a new event.*/
 export const popUpForm = (() => {
 	const eventButton = document.querySelector('[data-add-modal]');
@@ -57,57 +108,18 @@ export const popUpForm = (() => {
 		hideForm(eventModal);
 	});
 
-	function openForm(eventModal) {
+	const openForm = (eventModal) => {
 		if (eventModal == null) return;
 		eventModal.classList.add('active');
 		overlay.classList.add('active');
 	}
 
-	function hideForm(eventModal) {
+	const hideForm = (eventModal) => {
 		if (eventModal == null) return;
 		eventModal.classList.remove('active');
 		overlay.classList.remove('active');
 	}
 })();
 
-export const showCard = (() => {
-	const expandedCard = document.querySelector('[data-expand-modal]');
-	const expandButtons = document.querySelectorAll('[data-expand-event]');
-	const overlay = document.getElementById('overlay');
-	const cardTitle = document.querySelector('[data-event-title]');
-	const cardDescription = document.querySelector('[data-card-description]');
-	const cardDueDate = document.querySelector('[data-card-due-date]');
-	const cardPriority = document.querySelector('[data-card-priority]');
-	const cardCompleteStatus = document.querySelector('[data-complete-status]');
-	const closeCardButton = document.querySelector('[data-card-close]');
-	const updateButton = document.createElement('button');
-	const bottomRow = document.querySelector('[data-bottom-row]');
 
-	expandButtons.forEach((button, index) => {
-		button.addEventListener('click', () => {
-			const clickedEvent = myEvents[index];
-			expandCard(clickedEvent, index);
-			overlay.classList.add('active');
-		});
-	});
-
-	closeCardButton.addEventListener('click', () => {
-		const modal = closeCardButton.closest('.wrap-event-modal');
-		closeCard(modal);
-	});
-
-
-	function expandCard(clickedEvent, index) {
-		cardTitle.innerHTML = `<strong>${clickedEvent.title}</strong>`;
-		cardDescription.innerHTML = `${clickedEvent.description}`;
-		cardDueDate.innerHTML = `<strong>Due:</strong> ${clickedEvent.dueDate}`;
-		cardPriority.innerHTML = `<strong>Priority:</strong> ${clickedEvent.priority[0].toUpperCase() + clickedEvent.priority.slice(1)}`;
-		cardCompleteStatus.innerHTML = `<strong>Complete:&nbsp;</strong> ${clickedEvent.complete == true ? "Yes" : "No"}`;
-		expandedCard.classList.add('active');
-	}
-
-	function closeCard(modal) {
-		modal.classList.remove('active');
-		overlay.classList.remove('active');
-	}
-})();
+updateDisplay.updateToDoDisplay();
