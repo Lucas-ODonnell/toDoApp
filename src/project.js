@@ -1,11 +1,6 @@
 export class Project {
-	constructor(title, description, projectToDo=[]) {
+	constructor(title, description) {
 		this.title = title;
 		this.description = description;
-		this.projectToDo = projectToDo;
-	}
-
-	addToDo(todo) {
-		this.projectToDo.push(todo);
 	}
 }

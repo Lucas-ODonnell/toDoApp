@@ -11,10 +11,9 @@ export const updateDisplay = (() => {
 
 	function updateToDoDisplay(){
 		tableBody.innerHTML = myEvents.map((toDoEvent,index) => `
-		<tr data-card-row-${index}>
+		<tr class="event-row" data-card-row-${index} data-expand-card="${index}">
 				<td><strong>To Do:</strong> ${toDoEvent.title} </td>
 				<td><strong>Due:</strong> ${toDoEvent.dueDate}</td>
-				<td><button class="is-expanded-card"data-expand-event="${index}">Expand</button></td>
 				<td><button data-edit-card="${index}">Edit</button></td>
 				<td><button class="is-danger" data-delete-card="${index}">Delete</button></td>
 				</tr><br />`).join('');
@@ -30,10 +29,10 @@ export const updateDisplay = (() => {
 	
 	//*****************Show Card *******************************************
 	function showCard(e) {
-		if (!e.target.matches('[data-expand-event]')) return;
+		if (!e.target.matches('[data-expand-card]')) return;
 		showThisCard.classList.add('active');
 		overlay.classList.add('active');
-		const index = e.target.dataset.expandEvent;
+		const index = e.target.dataset.expandCard;
 		fillCard(index);
 	}
 

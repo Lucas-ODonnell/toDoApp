@@ -11,34 +11,28 @@ export const submitForm = (() => {
 	eventForm.addEventListener('submit', newEvent);
 	function newEvent(e) {
 		e.preventDefault();
-		let newEvent = new ToDo({
+		const newEvent = new ToDo({
 			title: document.querySelector('[name=title]').value,
 			description: document.querySelector('[name=description]').value,
 			dueDate: document.querySelector('[name=due-date]').value,
 			priority: document.querySelector('[name=priority]').value
 		})
 		addToDoToArray(newEvent);
-		hideModal(modal);
-		hideOverlay(overlay);
 		this.reset();
+		closeOnSubmit();
 		updateDisplay.updateToDoDisplay();
 	}
 
 	const addToDoToArray = (newEvent) => {
-		let formatted = dateFormatter.formatDate(newEvent.dueDate);
+		const formatted = dateFormatter.formatDate(newEvent.dueDate);
 		newEvent.dueDate = formatted;
 		myEvents.push(newEvent);
 		localStorage.setItem('myEvents', JSON.stringify(myEvents));
 	}
 
-	const hideModal = (modal) => {
-		if (modal == null) return;
-		modal.classList.remove('active');
-	}
-
-	const hideOverlay = (overlay) => {
-		if (overlay == null) return;
+	const closeOnSubmit = () => {
 		overlay.classList.remove('active');
+		modal.classList.remove('active');
 	}
 })();
 
@@ -59,13 +53,11 @@ export const editToDo = (() => {
 
 	function updateThisEvent(e) {
 		e.preventDefault();
-		let thisEvent = myEvents[thisIndex];
 		setUpdatedParams();
 		makeChangesToEvent();
 		localStorage.setItem('myEvents', JSON.stringify(myEvents));
 		this.reset();
-		overlay.classList.remove('active');
-		updateCardModal.classList.remove('active');
+		closeOnSubmit();
 		updateDisplay.updateToDoDisplay();
 	}
 
@@ -77,7 +69,7 @@ export const editToDo = (() => {
 	}
 
 	const makeChangesToEvent = () => {
-		let thisObject = myEvents[thisIndex];
+		const thisObject = myEvents[thisIndex];
 		changeTitle(thisObject);
 		changeDescription(thisObject);
 		changeDueDate(thisObject);
@@ -85,31 +77,28 @@ export const editToDo = (() => {
 	}
 
 	const changeTitle = (thisObject) => {
-		if (newTitle == "") {
-			newTitle = thisObject.title;
-		};
+		if (newTitle == "") return; 
 		thisObject.updateTitle(newTitle);
 	}
 
 	const changeDescription = (thisObject) => {
-		if (newDescription == "") {
-			newDescription = thisObject.description;
-		};
+		if (newDescription == "") return;
 		thisObject.updateDescription(newDescription);
 	}
 
 	const changeDueDate = (thisObject) => {
-		if (newDueDate == "") {
-			newDueDate = thisObject.dueDate;
-			thisObject.updateDueDate(newDueDate);
-			return;
-		};
+		if (newDueDate == "") return;
 		thisObject.updateDueDate(dateFormatter.formatDate(newDueDate));
 	}
 
 	const changePriority = (thisObject) => {
 		if (newPriority == null) return;
 		thisObject.updatePriority(newPriority);
+	}
+
+	const closeOnSubmit = () => {
+		overlay.classList.remove('active');
+		updateCardModal.classList.remove('active');
 	}
 
 	return {

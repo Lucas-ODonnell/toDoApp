@@ -51,6 +51,10 @@ table {
 	box-sizing: border-box;
 }
 
+body {
+	background-color: rgb(211,211,211);
+}
+
 strong {
 	font-weight: bold;
 	font-style: normal;
@@ -59,13 +63,20 @@ strong {
 table {
 	overflow: scroll;
 	border-collapse: collapse;
-	width: 45%;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 16px;
 }
 
-tr {
+.event-table {
+	width: 45%;
+}
+
+.project-table {
+	width: 100%;
+}
+
+.event-row {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -74,15 +85,32 @@ tr {
 	border-radius: 15px;
 }
 
-tr.danger {
+.project-row {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+}
+
+.project-row:hover {
+	border: 3px solid white;
+}
+
+.event-row:hover {
+	border: 5px solid white;
+	cursor: pointer;
+}
+
+.event-row.danger {
 	background-color: red;
 }
 
-tr.medium {
+.event-row.medium {
 	background-color: yellow;
 }
 
-tr.easy {
+.event-row.easy {
 	background-color: green;
 }
 
@@ -100,6 +128,10 @@ button {
 
 header {
 	background-color: rgba(13,55,13,.75);
+	height: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 textarea {
@@ -115,9 +147,19 @@ input {
 	margin-bottom: 4px;
 }
 
+.sidenav {
+	height: 100%;
+	width: 160px;
+	position: fixed;
+	z-index: 1;
+	top: 40px;
+	left: 0;
+	background-color: grey;
+	overflow-x: hidden;
+	padding-top: 20px;
+}
+
 .title {
-	display: flex;
-	justify-content: center;
 	font-size: 2rem;
 	color: rgb(55,13,13);
 }

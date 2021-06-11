@@ -6,14 +6,6 @@ export default class ToDo {
 		this.priority = params.priority;
 	}
 
-	toggleComplete() {
-		if (this.complete === false) {
-			this.complete = true;
-		} else {
-			this.complete = false;
-		}
-	}
-
 	updateTitle(title) {
 		this.title = title;
 	}
