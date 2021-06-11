@@ -8,11 +8,28 @@
 	</head>
 	<body>
 		<header>
-			<h1 class="title">To Do Lists</h1>
+			<div class="wrap-title">
+				<h1 class="title">To Do Lists</h1>
+			</div>
 		</header><br />
 		<section>
+			<div class="sidenav">
+				<div class="wrap-btn">
+				<button>Add Project</button>
+				</div></br>
+				<table class="project-table">
+					<tbody data-project-list>
+						<tr class="project-row">
+							<td>Test</td>
+						</tr>
+					</tbody>
+				</table>
+				
+			</div>
+		</section>
+		<section>
 			<!-- this section is to display events -->
-			<table>
+			<table class="event-table">
 				<tbody data-todo-events>
 					<td>...empty</td>
 				</tbody>
@@ -46,18 +63,59 @@
 						<input type="text" name="update-title" id="update-title" >
 					</div>
 
+						<div>
+							<label for="update-description">Description: </label><br />
+							<textarea type="text" name="update-description" id="update-description" ></textarea>
+						</div>
+						<div class="date-priority">
+							<div>
+								<label for="update-due-date">Due Date: </label>
+								<input type="date" name="update-due-date" id="update-due-date" >
+							</div>
+								<div>
+									<label for="update-priority">Priority: </label>
+									<select id="update-priority" name="update-priority">
+										<option value="high">High</option>
+										<option value="medium">Medium</option>
+										<option value="low">Low</option>
+									</select>
+								</div>
+						</div>
+						<div class="add-event-submit">
+							<button data-submit-update type="submit">Update</button>
+						</div>
+				</form>
+			</div>
+		</section>
+		<section>
+			<!-- this section is for adding a new event -->
+			<div class="wrap-btn">
+				<button data-add-modal="#todo-modal">Add event</button>
+			</div>
+			<div data-wrap-form id="todo-modal" class="wrap-modal">
+				<form data-new-event-form class="todo-form">
+					<div class="modal-todoheader">
+						<h2><strong>Add an Event</strong></h2>
+						<button data-hide-button type="button" class="close-button">&times;</button>
+					</div>
+
 					<div>
-						<label for="update-description">Description: </label><br />
-						<textarea type="text" name="update-description" id="update-description" ></textarea>
+						<label for="title">Title: </label><br />
+						<input type="text" name="title" id="title" required>
+					</div>
+
+					<div>
+						<label for="description">Description: </label><br />
+						<textarea type="text" name="description" id="description" required></textarea>
 					</div>
 					<div class="date-priority">
 						<div>
-							<label for="update-due-date">Due Date: </label>
-							<input type="date" name="update-due-date" id="update-due-date" >
+							<label for="due-date">Due Date: </label>
+							<input type="date" name="due-date" id="due-date" required>
 						</div>
 						<div>
-							<label for="update-priority">Priority: </label>
-							<select id="update-priority" name="update-priority">
+							<label for="priority">Priority: </label>
+							<select id="priority" name="priority">
 								<option value="high">High</option>
 								<option value="medium">Medium</option>
 								<option value="low">Low</option>
@@ -65,50 +123,11 @@
 						</div>
 					</div>
 					<div class="add-event-submit">
-						<button data-submit-update type="submit">Update</button>
+						<button data-submit-form type="submit">Add</button>
 					</div>
 				</form>
 			</div>
 		</section>
-		<!-- this section is for adding a new event -->
-		<div class="wrap-btn">
-			<button data-add-modal="#todo-modal">Add event</button>
-		</div>
-		<div data-wrap-form id="todo-modal" class="wrap-modal">
-			<form data-new-event-form class="todo-form">
-				<div class="modal-todoheader">
-					<h2><strong>Add an Event</strong></h2>
-					<button data-hide-button type="button" class="close-button">&times;</button>
-				</div>
-
-				<div>
-					<label for="title">Title: </label><br />
-					<input type="text" name="title" id="title" required>
-				</div>
-
-				<div>
-					<label for="description">Description: </label><br />
-					<textarea type="text" name="description" id="description" required></textarea>
-				</div>
-				<div class="date-priority">
-					<div>
-						<label for="due-date">Due Date: </label>
-						<input type="date" name="due-date" id="due-date" required>
-					</div>
-					<div>
-						<label for="priority">Priority: </label>
-						<select id="priority" name="priority">
-							<option value="high">High</option>
-							<option value="medium">Medium</option>
-							<option value="low">Low</option>
-						</select>
-					</div>
-				</div>
-				<div class="add-event-submit">
-					<button data-submit-form type="submit">Add</button>
-				</div>
-			</form>
-		</div>
 		<!-- used to darken background when using modal -->
 		<div id="overlay"></div>
 	</body>
