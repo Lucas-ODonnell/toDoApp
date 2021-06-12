@@ -15,8 +15,17 @@
 		<section>
 			<div class="sidenav">
 				<div class="wrap-btn">
-				<button>Add Project</button>
+					<button data-new-project=".project-form" >New Project</button>
 				</div></br>
+				<form data-add-project class="project-form">
+					<div>
+						<label id="project-name" for="project-title">Title </label><br />
+						<input type="text" name="project-title" id="project-title" >
+					</div>
+						<div class="add-project-submit">
+							<button type="submit">Add Project</button>
+						</div>
+				</form>
 				<table class="project-table">
 					<tbody data-project-list>
 						<tr class="project-row">
@@ -24,7 +33,7 @@
 						</tr>
 					</tbody>
 				</table>
-				
+
 			</div>
 		</section>
 		<section>

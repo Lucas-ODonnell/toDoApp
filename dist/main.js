@@ -26,7 +26,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _toDoDom_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./toDoDom.js */ \"./src/toDoDom.js\");\n\n\n\n\n\n\n\n\n\n//# sourceURL=webpack://todoapp/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _toDoDom_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./toDoDom.js */ \"./src/toDoDom.js\");\n/* harmony import */ var _projectDom_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./projectDom.js */ \"./src/projectDom.js\");\n\n\n\n\n\n\n\n\n\n\n//# sourceURL=webpack://todoapp/./src/index.js?");
 
 /***/ }),
 
@@ -37,6 +37,16 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _toD
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"myEvents\": () => (/* binding */ myEvents)\n/* harmony export */ });\n/* harmony import */ var _toDo_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./toDo.js */ \"./src/toDo.js\");\n\nlet myEvents = [];\nconst storedLibrary = localStorage.getItem('myEvents');\nif (storedLibrary) {\n\tmyEvents = JSON.parse(storedLibrary).map((event) => new _toDo_js__WEBPACK_IMPORTED_MODULE_0__.default(event));\n}\n\n\n\n\n//# sourceURL=webpack://todoapp/./src/myEvents.js?");
+
+/***/ }),
+
+/***/ "./src/projectDom.js":
+/*!***************************!*\
+  !*** ./src/projectDom.js ***!
+  \***************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"showProject\": () => (/* binding */ showProject)\n/* harmony export */ });\nconst showProject = (() => {\n\tconst newProjectButton = document.querySelector('[data-new-project]');\n\n\tnewProjectButton.addEventListener('click', () => {\n\t\tconst projectForm = document.querySelector(newProjectButton.dataset.newProject); \n\t\ttoggleProjectForm(projectForm);\n\t})\n\n\tconst toggleProjectForm = (projectForm) => {\n\t\tif (projectForm.classList.contains('active')) {\n\t\t\tprojectForm.classList.remove('active');\n\t\t} else {\n\t\t\tprojectForm.classList.add('active');\n\t\t}\n\t}\n})();\n\n\n//# sourceURL=webpack://todoapp/./src/projectDom.js?");
 
 /***/ }),
 

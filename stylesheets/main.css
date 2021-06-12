@@ -68,6 +68,42 @@ table {
 	margin-top: 16px;
 }
 
+td {
+	cursor: default;
+}
+
+td {
+	padding: 5px;
+	width: auto;
+	font-size: 16px;
+	font-style: italic;
+}
+
+button {
+	cursor: pointer;
+}
+
+header {
+	background-color: rgba(13,55,13,.75);
+	height: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+textarea {
+	margin-top: 4px;
+	margin-bottom: 8px;
+	width: 400px;
+	height: 300px;
+	resize: none;
+}
+
+input {
+	margin-top: 4px;
+	margin-bottom: 4px;
+}
+
 .event-table {
 	width: 45%;
 }
@@ -112,39 +148,6 @@ table {
 
 .event-row.easy {
 	background-color: green;
-}
-
-
-td {
-	padding: 5px;
-	width: auto;
-	font-size: 16px;
-	font-style: italic;
-}
-
-button {
-	cursor: pointer;
-}
-
-header {
-	background-color: rgba(13,55,13,.75);
-	height: 40px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-textarea {
-	margin-top: 4px;
-	margin-bottom: 8px;
-	width: 400px;
-	height: 300px;
-	resize: none;
-}
-
-input {
-	margin-top: 4px;
-	margin-bottom: 4px;
 }
 
 .sidenav {
@@ -290,4 +293,25 @@ input {
 
 #hidden-field {
 	display: none;
+}
+
+.project-form {
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	display: none;
+}
+
+.project-form.active {
+	display: flex;
+}
+
+#project-name {
+	display: block;
+	text-align: center;
+}
+
+#project-title {
+	margin-top: -10px;
+	margin-bottom: 4px;
 }
