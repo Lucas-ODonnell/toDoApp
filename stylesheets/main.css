@@ -68,15 +68,12 @@ table {
 	margin-top: 16px;
 }
 
-td {
-	cursor: default;
-}
 
 td {
+	cursor: default;
 	padding: 5px;
 	width: auto;
 	font-size: 16px;
-	font-style: italic;
 }
 
 button {
@@ -314,4 +311,18 @@ input {
 #project-title {
 	margin-top: -10px;
 	margin-bottom: 4px;
+	text-indent: 8px;
+	max-width: 150px;
+}
+
+.project-row {
+	cursor: default;
+}
+
+.project-name {
+	cursor: pointer;
+}
+
+.project-name:hover {
+	color: white;
 }

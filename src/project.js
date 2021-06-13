@@ -1,6 +1,7 @@
-export class Project {
-	constructor(title, description) {
-		this.title = title;
-		this.description = description;
+
+export default class Project {
+	constructor(params) {
+		this.title = params.title;
+		this.id = params.id;
 	}
 }

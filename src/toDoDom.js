@@ -1,5 +1,6 @@
-import { editToDo, deleteEvents} from './toDoActions.js';
+import { myProjects, currentProject, selectProject } from './myProjects.js';
 import { myEvents } from './myEvents.js';
+import { editToDo, deleteEvents} from './toDoActions.js';
 
 export const updateDisplay = (() => {
 	const tableBody = document.querySelector('[data-todo-events]');
@@ -10,7 +11,10 @@ export const updateDisplay = (() => {
 	const overlay = document.getElementById('overlay');
 
 	function updateToDoDisplay(){
-		tableBody.innerHTML = myEvents.map((toDoEvent,index) => `
+		if (currentProject == null) return;
+		tableBody.innerHTML =  myEvents
+			.filter(thisEvent => thisEvent.projectId == currentProject.id)
+			.map((toDoEvent,index) => `
 		<tr class="event-row" data-card-row-${index} data-expand-card="${index}">
 				<td><strong>To Do:</strong> ${toDoEvent.title} </td>
 				<td><strong>Due:</strong> ${toDoEvent.dueDate}</td>
@@ -18,15 +22,16 @@ export const updateDisplay = (() => {
 				<td><button class="is-danger" data-delete-card="${index}">Delete</button></td>
 				</tr><br />`).join('');
 		//color code the events based on priority
-		myEvents.map((toDoEvent, index) => {
-			colorCode(toDoEvent, index);
-		});
+		myEvents.filter(thisEvent => thisEvent.projectId == currentProject.id)
+			.map((toDoEvent, index) => {
+				colorCode(toDoEvent, index);
+			});
 	};
 
 	tableBody.addEventListener('click', deleteEvents.deleteRow); // ./toDoActions.js
 	tableBody.addEventListener('click', showCard);
 	tableBody.addEventListener('click', showCardToUpdate);
-	
+
 	//*****************Show Card *******************************************
 	function showCard(e) {
 		if (!e.target.matches('[data-expand-card]')) return;
@@ -102,6 +107,10 @@ export const popUpForm = (() => {
 
 	const openForm = (eventModal) => {
 		if (eventModal == null) return;
+		if (currentProject == null) {
+			window.alert("You need to set up a project");
+			return;
+		}
 		eventModal.classList.add('active');
 		overlay.classList.add('active');
 	}
