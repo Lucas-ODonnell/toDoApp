@@ -1,4 +1,4 @@
-import { myProjects, currentProject, selectProject } from './myProjects.js';
+import {currentProject} from './myProjects.js';
 import { myEvents } from './myEvents.js';
 import { editToDo, deleteEvents} from './toDoActions.js';
 
@@ -89,7 +89,7 @@ export const updateDisplay = (() => {
 	}
 })();
 
-/*This is the form for creating a new event.*/
+/*This is opens the modal which contains the form to create a new event.*/
 export const popUpForm = (() => {
 	const eventButton = document.querySelector('[data-add-modal]');
 	const eventExitButton = document.querySelector('[data-hide-button]');
@@ -121,4 +121,3 @@ export const popUpForm = (() => {
 		overlay.classList.remove('active');
 	}
 })();
-updateDisplay.updateToDoDisplay();

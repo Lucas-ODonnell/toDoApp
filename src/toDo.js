@@ -1,5 +1,3 @@
-import { myProjects, currentProject, selectProject } from './myProjects.js';
-
 export default class ToDo {
 	constructor(params) {
 		this.id = params.id;

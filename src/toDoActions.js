@@ -1,17 +1,15 @@
-import { myProjects, currentProject, selectProject } from './myProjects.js';
+import { currentProject } from './myProjects.js';
 import { myEvents } from './myEvents.js';
 import {dateFormatter} from './dateFormatter.js';
 import ToDo from './toDo.js';
 import {updateDisplay} from './toDoDom.js';
-import { updatedArray } from './updateArray.js';
 import { v4 as uuidv4 } from 'uuid';
-
-
+//This is submitForm for new event aka todo
 export const submitForm = (() => {
 	const modal = document.querySelector('[data-wrap-form]');
 	const overlay = document.getElementById('overlay');
-
 	const eventForm = document.querySelector('[data-new-event-form]');
+
 	eventForm.addEventListener('submit', newEvent);
 	function newEvent(e) {
 		e.preventDefault();

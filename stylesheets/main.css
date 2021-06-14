@@ -81,7 +81,7 @@ button {
 
 header {
 	background-color: rgba(13,55,13,.75);
-	height: 40px;
+	height: 60px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -134,7 +134,8 @@ input {
 
 .title {
 	font-size: 2rem;
-	color: rgb(55,13,13);
+	color: white;
+	font-weight: bold;
 }
 .wrap-modal {
 	position: fixed;
@@ -270,7 +271,7 @@ input {
 	width: 160px;
 	position: fixed;
 	z-index: 1;
-	top: 40px;
+	top: 60px;
 	left: 0;
 	background-color: grey;
 	overflow-x: hidden;
@@ -326,6 +327,10 @@ input {
 .project-name {
 	cursor: pointer;
 	font-weight: bold;
+}
+
+.title-label {
+	margin-bottom: 6px;
 }
 
 .project-name:hover {

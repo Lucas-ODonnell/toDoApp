@@ -53,9 +53,12 @@ export const chooseProject = (() => {
 		currentTitle.innerText = currentHeader;
 	}
 
-	const defaultHeader = () => {
-		if (myProjects.length == 0) return;
+	const defaultHeader = (index) => {
 		const currentTitle = document.querySelector('[data-header-title]');
+		if (myProjects.length == 0) {
+			currentTitle.innerText = "To Do Lists";
+			return;
+		};
 		currentTitle.innerText = myProjects[0].title;
 	}
 
@@ -65,6 +68,3 @@ export const chooseProject = (() => {
 	}
 })();
 
-
-showAllProjects.updateAllProjects();
-chooseProject.defaultHeader();

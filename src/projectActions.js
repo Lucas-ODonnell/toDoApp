@@ -1,6 +1,6 @@
-import { myProjects, currentProject, selectProject } from './myProjects.js';
+import { myProjects} from './myProjects.js';
 import Project from './project.js';
-import { showAllProjects } from './projectDom.js';
+import { showAllProjects, chooseProject } from './projectDom.js';
 import { myEvents } from './myEvents.js';
 import { updateDisplay } from './toDoDom.js';
 import { v4 as uuidv4 } from 'uuid';
@@ -36,36 +36,33 @@ export const deleteProject = (() => {
 		if (!e.target.matches('[data-delete-project]')) return;
 		const thisIndex = e.target.dataset.deleteProject;
 		const thisProject = myProjects[thisIndex];
-		deleteThisProject(thisProject, thisIndex);
+		let result = confirm("Are you sure you want to delete this project?");
+		if (result) {
+			deleteThisProject(thisProject, thisIndex);
+		}
 	}
 
 	const deleteThisProject = (thisProject, thisIndex) => {
 		const relatedEvents = [];
-		const relatedIndex = [];
-		console.log(thisIndex);
 		/* Get all related events */
 		myEvents.forEach(event => {
 			if (event.projectId == thisProject.id) {
 				relatedEvents.push(event);
 			}
 		});
-		/*Get indexes of related Events */
-		relatedEvents.forEach(event => {
-			let currentEvent = myEvents.findIndex(thisEvent => thisEvent.id == event.id)
-			relatedIndex.push(currentEvent);
-		})
-
-		deleteRelatedEvents(relatedIndex);
+		deleteRelatedEvents(relatedEvents);
 		myProjects.splice(thisIndex, 1);
-		showAllProjects.updateAllProjects();
 		updateDisplay.updateToDoDisplay();
+		showAllProjects.updateAllProjects();
 		localStorage.setItem('myProjects', JSON.stringify(myProjects));
-		localStorage.setItem('myEvents', JSON.stringify(myEvents));
+		chooseProject.defaultHeader();
 	}
 
-	const deleteRelatedEvents = (relatedIndex) => {
-		relatedIndex.forEach(index => {
-			myEvents.splice(index, 1);
+	const deleteRelatedEvents = (relatedEvents) => {
+		relatedEvents.forEach(event => {
+			myEvents.splice(myEvents.indexOf(event), 1);
+
 		});
+	       localStorage.setItem('myEvents', JSON.stringify(myEvents));
 	} 
 })();

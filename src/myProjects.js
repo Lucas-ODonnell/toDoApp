@@ -18,12 +18,9 @@ export const selectProject = (() => {
 		currentProject = myProjects[index];
 	}
 
-	
-
 	return {
 		setCurrentProject,
 		defaultProject
 	}
 })();
 
-selectProject.defaultProject();
