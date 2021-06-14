@@ -1,0 +1,350 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+*,*::before,*::after {
+	box-sizing: border-box;
+}
+
+body {
+	background-color: rgb(211,211,211);
+}
+
+strong {
+	font-weight: bold;
+	font-style: normal;
+}
+
+table {
+	overflow: scroll;
+	border-collapse: collapse;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 16px;
+}
+
+td {
+	cursor: default;
+	padding: 5px;
+	width: auto;
+	font-size: 16px;
+}
+
+button {
+	cursor: pointer;
+}
+
+header {
+	background-color: rgba(13,55,13,.75);
+	height: 60px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+textarea {
+	margin-top: 4px;
+	margin-bottom: 8px;
+	width: 400px;
+	height: 300px;
+	resize: none;
+}
+
+input {
+	margin-top: 4px;
+	margin-bottom: 4px;
+}
+
+.event-table {
+	width: 45%;
+}
+
+.event-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-radius: 15px;
+}
+
+
+
+.event-row:hover {
+	border: 5px solid white;
+	cursor: pointer;
+}
+
+.event-row.danger {
+	background-color: red;
+}
+
+.event-row.medium {
+	background-color: yellow;
+}
+
+.event-row.easy {
+	background-color: green;
+}
+
+.title {
+	font-size: 2rem;
+	color: white;
+	font-weight: bold;
+}
+.wrap-modal {
+	position: fixed;
+	top: 20%;
+	left: 40%;
+	right: 40%;
+	transform: scale(0);
+	z-index: 10;
+	background-color: white;
+	transition: 200ms ease-in-out;
+	border: 1px solid black;
+	border-radius: 10px;
+	width: 500px;
+	max-width: 80%;
+}
+
+.wrap-modal.active {
+	transform: scale(1);
+}
+
+#overlay {
+	position: fixed;
+	opacity: 0;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0,0,0,.5);
+	pointer-events: none;
+	transition: 200ms ease-in-out;
+}
+
+#overlay.active {
+	pointer-events: all;
+	opacity: 1;
+}
+
+.todo-form {
+	padding-top: 16px;
+	padding-bottom: 8px;
+	padding-left: 16px;
+	padding-right: 16px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.modal-todoheader {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 8px;
+}
+
+.close-button {
+	font-weight: bold;
+	font-size: 1.25rem;
+	border: none;
+	background: none;
+}
+
+.add-event-submit {
+	margin-top: 8px;
+	text-align: center;
+}
+
+.wrap-btn {
+	display: flex;
+	justify-content: center;
+}
+
+.h3-btn {
+	margin-bottom: 8px;
+	text-decoration: underline;
+}
+
+.wrap-event-modal {
+	position: fixed;
+	top: 20%;
+	left: 40%;
+	right: 40%;
+	z-index: 10;
+	background-color: white;
+	transition: 200ms ease-in-out;
+	border-radius: 10px;
+	width: 500px;
+	max-width: 80%;
+	transform: scale(0);
+}
+
+.wrap-event-modal.active {
+	transform: scale(1);
+}
+
+
+.card-border {
+	border: 1px solid black;
+}
+
+.date-priority {
+	display: flex;
+	justify-content: space-around;
+}
+
+.card {
+	padding-top: 16px;
+	padding-bottom: 8px;
+	padding-left: 16px;
+	padding-right: 16px;
+}
+
+.wrap-event-close {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.wrap-text {
+	margin-bottom: 8px;
+	word-wrap: break-word;
+	line-height: 1.5;
+}
+
+.wrap-complete {
+	margin-top: 8px;
+}
+
+#hidden-field {
+	display: none;
+}
+
+.sidenav {
+	height: 100%;
+	width: 160px;
+	position: fixed;
+	z-index: 1;
+	top: 60px;
+	left: 0;
+	background-color: grey;
+	overflow-x: hidden;
+	padding-top: 20px;
+}
+
+.project-table {
+	width: 100%;
+}
+
+.project-row {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+}
+
+.project-row:hover {
+	border: 3px solid white;
+}
+
+.project-form {
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	display: none;
+}
+
+.project-form.active {
+	display: flex;
+}
+
+#project-name {
+	display: block;
+	text-align: center;
+}
+
+#project-title {
+	margin-top: -10px;
+	margin-bottom: 4px;
+	text-indent: 8px;
+	max-width: 150px;
+}
+
+.project-row {
+	cursor: default;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.project-name {
+	cursor: pointer;
+	font-weight: bold;
+}
+
+.title-label {
+	margin-bottom: 6px;
+}
+
+.project-name:hover {
+	color: white;
+}
+
+.delete-project {
+	color: red;
+	font-size: 1.2rem;
+	font-weight: bold;
+	border: none;
+	background: none;
+}
+
+.delete-project:hover {
+	color: white;
+}
