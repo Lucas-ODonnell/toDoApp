@@ -4,6 +4,8 @@ import {dateFormatter} from './dateFormatter.js';
 import ToDo from './toDo.js';
 import {updateDisplay} from './toDoDom.js';
 import { updatedArray } from './updateArray.js';
+import { v4 as uuidv4 } from 'uuid';
+
 
 export const submitForm = (() => {
 	const modal = document.querySelector('[data-wrap-form]');
@@ -15,6 +17,7 @@ export const submitForm = (() => {
 		e.preventDefault();
 		//set currentId seperately or all the projectId will be set to current id on init
 		const currentId = currentProject.id;
+		const eventId = uuidv4();
 
 		const newEvent = new ToDo({
 			title: document.querySelector('[name=title]').value,
@@ -23,6 +26,7 @@ export const submitForm = (() => {
 			priority: document.querySelector('[name=priority]').value,
 		})
 		newEvent.projectId = currentId;
+		newEvent.id = eventId;
 		addToDoToArray(newEvent);
 		this.reset();
 		closeOnSubmit();
@@ -50,16 +54,17 @@ export const editToDo = (() => {
 	let newDescription = "";
 	let newDueDate = "";
 	let newPriority = "";
-	let thisIndex;
+	let thisEvent;
 
-	const updateModalEvent = (index) => {
-		thisIndex = index
+	const updateModalEvent = (thisEventId) => {
+		thisEvent = myEvents.find(thisEvent => thisEvent.id == thisEventId);
 		editForm.addEventListener('submit', updateThisEvent);
 	}
 
 	function updateThisEvent(e) {
 		e.preventDefault();
 		setUpdatedParams();
+		makeChangesToEvent();
 		localStorage.setItem('myEvents', JSON.stringify(myEvents));
 		this.reset();
 		closeOnSubmit();
@@ -74,11 +79,10 @@ export const editToDo = (() => {
 	}
 
 	const makeChangesToEvent = () => {
-		const thisObject = myEvents[thisIndex];
-		changeTitle(thisObject);
-		changeDescription(thisObject);
-		changeDueDate(thisObject);
-		changePriority(thisObject);
+		changeTitle(thisEvent);
+		changeDescription(thisEvent);
+		changeDueDate(thisEvent);
+		changePriority(thisEvent);
 	}
 
 	const changeTitle = (thisObject) => {

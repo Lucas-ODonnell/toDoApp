@@ -18,7 +18,7 @@ export const updateDisplay = (() => {
 		<tr class="event-row" data-card-row-${index} data-expand-card="${index}">
 				<td><strong>To Do:</strong> ${toDoEvent.title} </td>
 				<td><strong>Due:</strong> ${toDoEvent.dueDate}</td>
-				<td><button data-edit-card="${index}">Edit</button></td>
+				<td><button data-edit-card="${toDoEvent.id}">Edit</button></td>
 				<td><button class="is-danger" data-delete-card="${index}">Delete</button></td>
 				</tr><br />`).join('');
 		//color code the events based on priority
@@ -62,8 +62,8 @@ export const updateDisplay = (() => {
 		if (!e.target.matches('[data-edit-card]')) return;
 		updateCardModal.classList.add('active');
 		overlay.classList.add('active');
-		const index = e.target.dataset.editCard;
-		editToDo.updateModalEvent(index);
+		const thisEventId = e.target.dataset.editCard;
+		editToDo.updateModalEvent(thisEventId);
 	}
 
 	updateCloseButton.addEventListener('click', () => {
