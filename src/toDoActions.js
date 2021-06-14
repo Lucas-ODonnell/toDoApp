@@ -118,7 +118,9 @@ export const editToDo = (() => {
 export const deleteEvents = (() => {
 	function deleteRow(e) {
 		if (!e.target.matches('[data-delete-card]')) return;
-		myEvents.splice(e.target.dataset.deleteCard, 1);
+		const thisEventId = e.target.dataset.deleteCard;
+		const thisIndex = myEvents.findIndex(thisEvent => thisEvent.id == thisEventId);
+		myEvents.splice(thisIndex, 1);
 		localStorage.setItem('myEvents', JSON.stringify(myEvents));
 		updateDisplay.updateToDoDisplay();
 	}

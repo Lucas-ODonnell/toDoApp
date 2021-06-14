@@ -19,7 +19,7 @@ export const updateDisplay = (() => {
 				<td><strong>To Do:</strong> ${toDoEvent.title} </td>
 				<td><strong>Due:</strong> ${toDoEvent.dueDate}</td>
 				<td><button data-edit-card="${toDoEvent.id}">Edit</button></td>
-				<td><button class="is-danger" data-delete-card="${index}">Delete</button></td>
+				<td><button class="is-danger" data-delete-card="${toDoEvent.id}">Delete</button></td>
 				</tr><br />`).join('');
 		//color code the events based on priority
 		myEvents.filter(thisEvent => thisEvent.projectId == currentProject.id)

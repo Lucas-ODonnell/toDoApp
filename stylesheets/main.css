@@ -68,7 +68,6 @@ table {
 	margin-top: 16px;
 }
 
-
 td {
 	cursor: default;
 	padding: 5px;
@@ -105,10 +104,6 @@ input {
 	width: 45%;
 }
 
-.project-table {
-	width: 100%;
-}
-
 .event-row {
 	display: flex;
 	justify-content: space-between;
@@ -118,17 +113,7 @@ input {
 	border-radius: 15px;
 }
 
-.project-row {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border-top: 1px solid black;
-	border-bottom: 1px solid black;
-}
 
-.project-row:hover {
-	border: 3px solid white;
-}
 
 .event-row:hover {
 	border: 5px solid white;
@@ -145,18 +130,6 @@ input {
 
 .event-row.easy {
 	background-color: green;
-}
-
-.sidenav {
-	height: 100%;
-	width: 160px;
-	position: fixed;
-	z-index: 1;
-	top: 40px;
-	left: 0;
-	background-color: grey;
-	overflow-x: hidden;
-	padding-top: 20px;
 }
 
 .title {
@@ -292,6 +265,34 @@ input {
 	display: none;
 }
 
+.sidenav {
+	height: 100%;
+	width: 160px;
+	position: fixed;
+	z-index: 1;
+	top: 40px;
+	left: 0;
+	background-color: grey;
+	overflow-x: hidden;
+	padding-top: 20px;
+}
+
+.project-table {
+	width: 100%;
+}
+
+.project-row {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+}
+
+.project-row:hover {
+	border: 3px solid white;
+}
+
 .project-form {
 	flex-direction: column;
 	justify-content: center;
@@ -317,12 +318,28 @@ input {
 
 .project-row {
 	cursor: default;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
 }
 
 .project-name {
 	cursor: pointer;
+	font-weight: bold;
 }
 
 .project-name:hover {
+	color: white;
+}
+
+.delete-project {
+	color: red;
+	font-size: 1.2rem;
+	font-weight: bold;
+	border: none;
+	background: none;
+}
+
+.delete-project:hover {
 	color: white;
 }

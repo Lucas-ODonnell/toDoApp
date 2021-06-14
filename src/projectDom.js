@@ -24,6 +24,7 @@ export const showAllProjects = (() => {
 	const updateAllProjects = () => {
 		tableBody.innerHTML = myProjects.map((project, index) => `<tr class="project-row">
 							<td class="project-name "data-project-target="${index}">${project.title}</td>
+							<td><button class="delete-project" data-delete-project="${index}">&times</button></td>
 						</tr>`).join("");
 	}
 
