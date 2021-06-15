@@ -1,7 +1,7 @@
-import { selectProject } from './myProjects.js';
-import {updateDisplay} from './toDoDom.js';
-import {showAllProjects, chooseProject} from './projectDom.js';
-import { newProject, deleteProject } from './projectActions.js';
+import { selectProject } from './myProjects';
+import { updateDisplay } from './toDoDom';
+import { showAllProjects, chooseProject } from './projectDom';
+import { createNewProject, deleteProject } from './projectActions';
 
 selectProject.defaultProject();
 showAllProjects.updateAllProjects();
