@@ -7,11 +7,3 @@ selectProject.defaultProject();
 showAllProjects.updateAllProjects();
 chooseProject.defaultHeader();
 updateDisplay.updateToDoDisplay();
-
-
-
-
-
-
-
-

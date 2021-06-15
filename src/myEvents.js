@@ -6,19 +6,3 @@ if (storedLibrary) {
 	myEvents = JSON.parse(storedLibrary).map((event) => new ToDo(event));
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
